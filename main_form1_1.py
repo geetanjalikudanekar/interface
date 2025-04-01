@@ -6,10 +6,12 @@ import pandas as pd
 from save_to_csv_step1 import intset_cvs_step1
 from save_to_csv_step2 import insert_csv_step2
 from dshbord_entry import dshbord_enty_1,dshbord_enty_2
-from variables import variable_dict,\
-                      desctn_e_w_b,desctn_e_w_s,desctn_e_w_m,desctn_label_full,desctn_lable_font,desctn_entry_font ,\
-                      stp12_head_font,stp12_l_w,stp12_l_w1,stp12_e_w_s,stp12_e_w_b,stp12_lable_font,stp12_entry_font,stp12_l_wm,\
-                      csv_data_file,cvs_descrptn_file ,no_dash_b_ent,step2_valid
+from variables import variable_dict, \
+    desctn_e_w_b, desctn_e_w_s, desctn_e_w_m, desctn_label_full, desctn_lable_font, desctn_entry_font, \
+    stp12_head_font, stp12_l_w, stp12_l_w1, stp12_e_w_s, stp12_e_w_b, stp12_lable_font, stp12_entry_font, stp12_l_wm, \
+    csv_data_file, cvs_descrptn_file, no_dash_b_ent, step2_valid, \
+    shift_deflt,oth_deflt,vlv_deflt,inlt_deflt,otlt_deflt
+
 from delete_file_dashbord_entry import dlt_entry_form
 from export_cvs import export_to_cvs
 
@@ -52,8 +54,9 @@ def on_btn1_clk():
     # Show success message and clear the form inputs
     messagebox.showinfo("Success", "Data saved successfully!")
 
-    for i in [name_e, part_e, po_no_e, po_qty_e, shift_e]:
+    for i in [name_e, part_e, po_no_e, po_qty_e]:
         i.delete(0, tk.END)
+    shift_e.set(shift_deflt)
 
 def on_btn2_clk():
     global step2_valid
@@ -61,30 +64,34 @@ def on_btn2_clk():
         good_part=good_part_e.get()
         reworked= reworked_e.get()
         QC_OK=QC_OK_e.get()
-        x1 = x1_e.get()
-        y1 = y1_e.get()
-        x2 = x2_e.get()
-        y2 = y2_e.get()
+        inlt = inlt_e.get()
+        vlv = vlv_e.get()
+        otlt = otlt_e.get()
+        oth = oth_e.get()
         hp=hp_e.get()
         lp=lp_e.get()
         currnt_time = datetime.now().strftime("%H:%M:%S")
 
         # Validate inputs
-        if not good_part or not QC_OK or not reworked or not x1 or not x2 or not y1 or not y2 or not hp or not lp:
+        if not good_part or not QC_OK or not reworked or not inlt or not otlt or not vlv or not oth or not hp or not lp:
             messagebox.showerror("Error", "All fields are required!")
             return
 
-        dshbord_enty_2(currnt_time,good_part,reworked,QC_OK,hp,lp,x1,x2,y2,y1)
+        dshbord_enty_2(currnt_time,good_part,reworked,QC_OK,hp,lp,inlt,otlt,oth,vlv)
 
         messagebox.showinfo("Success", "Data saved successfully!")
-        for i in [good_part_e,reworked_e,QC_OK_e,x1_e,x2_e,y2_e,y1_e,hp_e,lp_e]:
+        for i in [good_part_e,reworked_e,QC_OK_e,inlt_e,otlt_e,oth_e,vlv_e,hp_e,lp_e]:
             i.delete(0, tk.END)
+        for i,j in zip([inlt_e,otlt_e,oth_e,vlv_e],[inlt_deflt,otlt_deflt,oth_deflt,vlv_deflt]):
+            i.insert(0,j)
         step2_valid=0
 
     else:
         messagebox.showinfo("", "Complete Step1 first")
-        for i in [good_part_e, reworked_e, QC_OK_e, x1_e, x2_e, y2_e, y1_e, hp_e, lp_e]:
+        for i in [good_part_e,reworked_e,QC_OK_e,inlt_e,otlt_e,oth_e,vlv_e,hp_e,lp_e]:
             i.delete(0, tk.END)
+        for i,j in zip([inlt_e,otlt_e,oth_e,vlv_e],[inlt_deflt,otlt_deflt,oth_deflt,vlv_deflt]):
+            i.insert(0,j)
 
 # Create the main tkinter window
 root = tk.Tk()
@@ -169,17 +176,17 @@ reworked_l.grid(row=1, column=0, sticky="w")
 reworked_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
 reworked_e.grid(row=1, column=1, padx=4, pady=5)
 
-x1_l = tk.Label(step2, text="X1",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
-x1_l.grid(row=1, column=2, sticky="w")
-x1_e= ttk.Combobox(step2,values=["7--8","8--9","9--10"],font=stp12_entry_font,width=6)
-x1_e.grid(row=1, column=3, padx=4, pady=5)
-x1_e.set("0")
+inlt_l = tk.Label(step2, text="INLT",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
+inlt_l.grid(row=1, column=2, sticky="w")
+inlt_e= tk.Entry(step2,font=stp12_entry_font,width=6)
+inlt_e.grid(row=1, column=3, padx=4, pady=5)
+inlt_e.insert(0,0)
 
-x2_l = tk.Label(step2, text="X2",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
-x2_l.grid(row=1, column=4, sticky="w")
-x2_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
-x2_e.grid(row=1, column=5, padx=4, pady=5)
-x2_e.insert(0,"0")
+otlt_l = tk.Label(step2, text="OTLT",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
+otlt_l.grid(row=1, column=4, sticky="w")
+otlt_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
+otlt_e.grid(row=1, column=5, padx=4, pady=5)
+otlt_e.insert(0,"0")
 
 # Step 2 row 3
 QC_OK_l = tk.Label(step2, text="QC_OK",font=stp12_lable_font,anchor="w",width=stp12_l_w)
@@ -187,17 +194,17 @@ QC_OK_l.grid(row=2, column=0, sticky="w")
 QC_OK_e = tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
 QC_OK_e.grid(row=2, column=1, padx=4, pady=5)
 
-y1_l = tk.Label(step2, text="Y1",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
-y1_l.grid(row=2, column=2, sticky="w")
-y1_e= ttk.Combobox(step2,values=["7--8","8--9","9--10"],font=stp12_entry_font,width=6)
-y1_e.grid(row=2, column=3, padx=4, pady=5)
-y1_e.set("0")
+vlv_l = tk.Label(step2, text="VLV",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
+vlv_l.grid(row=2, column=2, sticky="w")
+vlv_e= tk.Entry(step2,font=stp12_entry_font,width=6)
+vlv_e.grid(row=2, column=3, padx=4, pady=5)
+vlv_e.insert(0,0)
 
-y2_l = tk.Label(step2, text="Y2",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
-y2_l.grid(row=2, column=4, sticky="w")
-y2_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
-y2_e.grid(row=2, column=5, padx=4, pady=5)
-y2_e.insert(0,"0")
+oth_l = tk.Label(step2, text="OTH",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
+oth_l.grid(row=2, column=4, sticky="w")
+oth_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
+oth_e.grid(row=2, column=5, padx=4, pady=5)
+oth_e.insert(0,"0")
 
 
 # Row 3: Submit button

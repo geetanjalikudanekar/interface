@@ -36,15 +36,15 @@ def dshbord_enty_1(currnt_date,currnt_time,part,po_no,po_qty):
     entry_disable()
 
 
-def dshbord_enty_2(currnt_time,good_part,reworked,QC_OK,hp,lp,x1,x2,y2,y1):
+def dshbord_enty_2(currnt_time,good_part,reworked,QC_OK,hp,lp,inlt,otlt,oth,vlv):
     counter = 1
     entry_normal()
     for i in range(1,no_dash_b_ent+1 ):  # finding out empty row for entry
-        value2 = variable_dict[f"G. Parts_{i}6"].get()
+        value2 = variable_dict[f"Good_{i}6"].get()
         if value2 == "":
             counter=i
             label = desctn_label_secnd # data entry in description frame
-            values = [currnt_time,good_part,reworked,QC_OK,hp,lp,x1,x2,y2,y1]
+            values = [currnt_time,good_part,reworked,QC_OK,hp,lp,inlt,otlt,oth,vlv]
             for index, (text, value) in enumerate(zip(label, values)):
                 variable_dict[f"{text}_{counter}{index+5}"].insert(0, value)
             start = (variable_dict[f"Start_{counter}1"].get())
@@ -53,22 +53,16 @@ def dshbord_enty_2(currnt_time,good_part,reworked,QC_OK,hp,lp,x1,x2,y2,y1):
             time_hm_e = datetime.strptime(end, "%H:%M:%S").strftime("%H:%M")
             Start_time = datetime.strptime(time_hm_s, "%H:%M")
             End_time = datetime.strptime(time_hm_e, "%H:%M")
-            print("Start",Start_time,"end",End_time)
             time_difference = End_time - Start_time
             total_min = time_difference.total_seconds() / 60
-            print(total_min)
-            print(Start_time,"sdfsdfsdfs",End_time)
-            print(total_min)
             if total_min > 0:  # To prevent division by zero
-                print("geetanjali")
                 value=int(variable_dict[f"QC_OK_{counter}8"].get())
                 PPH_value = (value/ total_min)*60
-                print(PPH_value)
                 variable_dict[f"PPH_{counter}15"].insert(0, PPH_value)
             else:
                 PPH_value = 0
                 variable_dict[f"PPH_{counter}15"].insert(0, PPH_value)
-            insert_csv_step2(currnt_time,good_part,reworked,QC_OK,hp,lp,x1,x2,y1,y2,PPH_value)
+            insert_csv_step2(currnt_time,good_part,reworked,QC_OK,hp,lp,inlt,otlt,vlv,oth,PPH_value)
             break
         else:continue
     entry_disable()

@@ -1,13 +1,26 @@
-from datetime import datetime
+import tkinter as tk
+from tkinter import ttk
 
-# Get the current date and time
-current_time = datetime.now()
+# Function to reset the ComboBox to its default value
+def reset_to_default():
+    # Set the default value for the ComboBox
+    combobox.set(default_value)
 
-# Define another date and time (you can customize this)
-other_time = datetime(2025, 4, 1, 12, 30, 0)  # Example: April 1, 2025, 12:30 PM
+# Create the main window
+root = tk.Tk()
+root.title("ComboBox Default Example")
 
-# Calculate the time difference
-time_difference = other_time - current_time
+# Define the default value
+default_value = "Select an item"
 
-# Display the result
-print(f"Time difference: {time_difference}")
+# Create a ComboBox with some items
+combobox = ttk.Combobox(root, values=["Bun", "Bread", "Croissant"])
+combobox.set(default_value)  # Set the default value at the start
+combobox.pack(pady=10)
+
+# Add a button to trigger the reset function
+reset_button = tk.Button(root, text="Reset to Default", command=reset_to_default)
+reset_button.pack(pady=10)
+
+# Run the application
+root.mainloop()
