@@ -15,10 +15,10 @@ desctn_e_w_m=10
 desctn_e_w_b=33
 desctn_lable_font=("arial",12)
 desctn_entry_font=("arial",12)
-desctn_label_full=[ "Date","Start","PO No", "PO QTY","Description", "End","G. Parts",
-           "Rewrkd", "QC_OK","HP","LP","X1","x2","Y1","Y2","PPH"]
+desctn_label_full=[ "Date","Start","PO No", "PO QTY","Description", "End","Good",
+           "Rewrkd", "QC_OK","HP","LP","INLT","OTLT","VLV","OTH","PPH"]
 desctn_label_frst=[ "Date","Start","PO No", "PO QTY","Description"]
-desctn_label_secnd=[ "End","G. Parts", "Rewrkd", "QC_OK","HP","LP","X1","x2","Y1","Y2"]
+desctn_label_secnd=[ "End","Good","Rewrkd", "QC_OK","HP","LP","INLT","OTLT","VLV","OTH"]
 def entry_normal():
     for i,text in enumerate(desctn_label_full):
         for j in range(1,no_dash_b_ent+1):
@@ -52,3 +52,10 @@ stp1_e_w_s=10
 stp2_l_w_s=15
 
 stp12_head_font=("Monotype Corsiva", 14, "bold")
+
+#defalt value varible
+shift_deflt="first"
+inlt_deflt=0
+otlt_deflt=0
+vlv_deflt=0
+oth_deflt=0

@@ -5,7 +5,6 @@ from variables import  csv_data_file
 def intset_cvs_step1(name,part,po_no,po_qty,shift,currnt_date,currnt_time,cvs_file):
     if os.path.exists(cvs_file):
         df = pd.read_csv(cvs_file)
-        print(df)
 
         # Determine the next Serial Num ber
     if not df.empty:
