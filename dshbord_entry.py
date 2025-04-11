@@ -3,10 +3,7 @@ from variables import variable_dict,cvs_descrptn_file,\
     entry_disable,entry_normal
 from datetime import datetime
 from save_to_csv_step2 import insert_csv_step2
-import csv,os
 import pandas as pd
-from variables import desctn_label_frst
-from tkinter import messagebox
 
 
 def dshbord_enty_1(currnt_date,currnt_time,part,po_no,po_qty):

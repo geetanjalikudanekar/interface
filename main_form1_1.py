@@ -9,7 +9,7 @@ from dshbord_entry import dshbord_enty_1,dshbord_enty_2
 from variables import variable_dict, \
     desctn_e_w_b, desctn_e_w_s, desctn_e_w_m, desctn_label_full, desctn_lable_font, desctn_entry_font, \
     stp12_head_font, stp12_l_w2, stp12_l_w1, stp12_e_w_s, stp12_e_w_b, stp12_lable_font, stp12_entry_font, stp12_l_wm, \
-    csv_data_file, cvs_descrptn_file, no_dash_b_ent, step2_valid, \
+    csv_data_file, no_dash_b_ent, \
     shift_deflt,oth_deflt,vlv_deflt,inlt_deflt,otlt_deflt,\
     px,py
 
@@ -56,7 +56,9 @@ def on_btn1_clk():
     messagebox.showinfo("Success", "Data saved successfully!")
 
     for i in [name_e, part_e, po_no_e, po_qty_e, shift_e]:
-        i.delete(0, tk.END)
+          i.delete(0, tk.END)
+    shift_e.insert(0, shift_deflt)
+
 
 def on_btn2_clk():
     global step2_valid

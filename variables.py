@@ -55,7 +55,7 @@ stp2_l_w_s=15
 stp12_head_font=("Monotype Corsiva", 14, "bold")
 
 #defalt value varible
-shift_deflt="first"
+shift_deflt="First"
 inlt_deflt=0
 otlt_deflt=0
 vlv_deflt=0
