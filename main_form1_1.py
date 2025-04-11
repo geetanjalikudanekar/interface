@@ -55,9 +55,8 @@ def on_btn1_clk():
     # Show success message and clear the form inputs
     messagebox.showinfo("Success", "Data saved successfully!")
 
-    for i in [name_e, part_e, po_no_e, po_qty_e]:
+    for i in [name_e, part_e, po_no_e, po_qty_e, shift_e]:
         i.delete(0, tk.END)
-    shift_e.set(shift_deflt)
 
 def on_btn2_clk():
     global step2_valid
@@ -154,8 +153,6 @@ stp1_btn_submit.grid(row=3,column=0, pady=10,sticky="",columnspan=4)
 # Create a labeled frame for "Parts Details"
 step2 = tk.LabelFrame(frame_out, text="STEP 2",font=stp12_head_font,padx=10, pady=10)
 step2.grid(row=0, column=1, padx=10, pady=10)
-
-
 
 # Step 2 row 1
 good_part_l= tk.Label(step2, text="Good Parts",font=stp12_lable_font,anchor="w",width=stp12_l_w2)
