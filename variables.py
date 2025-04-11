@@ -1,6 +1,8 @@
 
 step2_valid=0
 
+px=10
+py=5
 
 #files
 csv_data_file= "c:/Promat/data1.csv"
@@ -38,12 +40,11 @@ no_dash_b_ent=7
 
 
 #step 1 and 2 Variables
-stp12_e_w_s=8
-stp12_e_w_b=33
-
-stp12_l_w=9
-stp12_l_w1=6
-stp12_l_wm=3
+stp12_e_w_s=7
+stp12_e_w_b=27
+stp12_l_w2=9
+stp12_l_w1=7
+stp12_l_wm=4
 stp12_lable_font=("Arial",12)
 stp12_entry_font=("Arial",12)
 
