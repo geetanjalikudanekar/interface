@@ -8,9 +8,10 @@ from save_to_csv_step2 import insert_csv_step2
 from dshbord_entry import dshbord_enty_1,dshbord_enty_2
 from variables import variable_dict, \
     desctn_e_w_b, desctn_e_w_s, desctn_e_w_m, desctn_label_full, desctn_lable_font, desctn_entry_font, \
-    stp12_head_font, stp12_l_w, stp12_l_w1, stp12_e_w_s, stp12_e_w_b, stp12_lable_font, stp12_entry_font, stp12_l_wm, \
+    stp12_head_font, stp12_l_w2, stp12_l_w1, stp12_e_w_s, stp12_e_w_b, stp12_lable_font, stp12_entry_font, stp12_l_wm, \
     csv_data_file, cvs_descrptn_file, no_dash_b_ent, step2_valid, \
-    shift_deflt,oth_deflt,vlv_deflt,inlt_deflt,otlt_deflt
+    shift_deflt,oth_deflt,vlv_deflt,inlt_deflt,otlt_deflt,\
+    px,py
 
 from delete_file_dashbord_entry import dlt_entry_form
 from export_cvs import export_to_cvs
@@ -110,51 +111,54 @@ vcmd = (frame_out.register(validate_number), "%P")
 # Create a labeled frame for "Parts Details"
 step1 = tk.LabelFrame(frame_out, text="STEP 1",font=stp12_head_font, padx=10, pady=10)
 step1.grid(row=0, column=0, padx=10, pady=10)
-step1.grid_rowconfigure(3, weight=1)  # Allow row 3 to expand
-step1.grid_columnconfigure(0, weight=1)
+
 #
 
 
 
 # Row 1: Labels and Entry fields for "Name" and "Parts"
-name_l = tk.Label(step1, text="Name",font=stp12_lable_font,anchor="w",width=stp12_l_w1)
-name_l.grid(row=0, column=0, sticky="w")
+name_l = tk.Label(step1, text="Name",font=stp12_lable_font,width=stp12_l_w1)
+name_l.grid(row=0, column=0, sticky="w",padx=px,pady=4)
 name_e = tk.Entry(step1,font=stp12_entry_font,width=stp12_e_w_b)
-name_e.grid(row=0, column=1, columnspan=3,sticky="w")
+name_e.grid(row=0, column=1, columnspan=3,sticky="w",padx=px,pady=py)
 
-part_l = tk.Label(step1, text="Part",font=stp12_lable_font,anchor="w",width=stp12_l_w1)
-part_l.grid(row=1, column=0,sticky="w")
+part_l = tk.Label(step1, text="Part",font=stp12_lable_font,anchor="center",width=stp12_l_w1)
+part_l.grid(row=1, column=0,sticky="w",padx=4,pady=py)
 part_e = tk.Entry(step1,font=stp12_entry_font,width=stp12_e_w_s)
-part_e.grid(row=1, column=1,sticky="w")
+part_e.grid(row=1, column=1,sticky="w",padx=px,pady=py)
 
 # Row 2: Labels and Entry fields for "PO QTY" and "PO No"
-po_qty_l = tk.Label(step1, text="PO QTY",font=stp12_lable_font,anchor="w",width=stp12_l_w1)
-po_qty_l.grid(row=1, column=2, sticky="e")
+po_qty_l = tk.Label(step1, text="PO QTY",font=stp12_lable_font,width=stp12_l_w1)
+po_qty_l.grid(row=1, column=2, sticky="w",padx=px,pady=py)
 po_qty_e = tk.Entry(step1,font=stp12_entry_font,width=stp12_e_w_s,validate="key",validatecommand=vcmd)
-po_qty_e.grid(row=1, column=3, padx=4, pady=5,sticky="w")
+po_qty_e.grid(row=1, column=3,sticky="w",padx=px,pady=py)
 
-po_no_l = tk.Label(step1, text="PO No",font=stp12_lable_font,anchor="w",width=stp12_l_w1)
-po_no_l.grid(row=2, column=0, sticky="w")
+po_no_l = tk.Label(step1, text="PO No",font=stp12_lable_font,width=stp12_l_w1)
+po_no_l.grid(row=2, column=0, sticky="w",padx=px,pady=py)
 po_no_e= tk.Entry(step1,font=stp12_entry_font,width=stp12_e_w_s)
-po_no_e.grid(row=2, column=1, padx=4, pady=5,sticky="w")
+po_no_e.grid(row=2, column=1,sticky="w",padx=px,pady=py)
 
-shift_l = tk.Label(step1, text="Shift",font=stp12_lable_font,anchor="w",width=stp12_l_w1)
-shift_l.grid(row=2, column=2, sticky="e")
-shift_e=ttk.Combobox(step1,values=["First","Second","Third"],font=stp12_entry_font,width=6)
+shift_l = tk.Label(step1, text="Shift",font=stp12_lable_font,width=stp12_l_w1)
+shift_l.grid(row=2, column=2, sticky="w")
+shift_e=ttk.Combobox(step1,values=["First","Second","Third"],font=("Arial",10),width=6)
 shift_e.set("First")
-shift_e.grid(row=2, column=3, padx=4, pady=5,sticky="w")
+shift_e.grid(row=2, column=3,padx=px,pady=py,sticky="w")
 
 # Row 3: Submit button
 stp1_btn_submit = tk.Button(step1, text="Start Time",font=("Arial", 12,"bold") ,command=on_btn1_clk)
-stp1_btn_submit.grid(row=3,column=2, padx=20,pady=10,sticky="nsew")
+stp1_btn_submit.grid(row=3,column=0, pady=10,sticky="",columnspan=4)
+
+
 
 
 # Create a labeled frame for "Parts Details"
 step2 = tk.LabelFrame(frame_out, text="STEP 2",font=stp12_head_font,padx=10, pady=10)
 step2.grid(row=0, column=1, padx=10, pady=10)
 
+
+
 # Step 2 row 1
-good_part_l= tk.Label(step2, text="Good Parts",font=stp12_lable_font,anchor="w",width=stp12_l_w)
+good_part_l= tk.Label(step2, text="Good Parts",font=stp12_lable_font,anchor="w",width=stp12_l_w2)
 good_part_l.grid(row=0, column=0, sticky="w")
 good_part_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
 good_part_e.grid(row=0, column=1, padx=4, pady=5)
@@ -171,14 +175,14 @@ lp_e.grid(row=0, column=5, padx=4, pady=5)
 
 # Step 2 row 2
 
-reworked_l= tk.Label(step2, text="Reworked",font=stp12_lable_font,anchor="w",width=stp12_l_w)
+reworked_l= tk.Label(step2, text="Reworked",font=stp12_lable_font,anchor="w",width=stp12_l_w2)
 reworked_l.grid(row=1, column=0, sticky="w")
 reworked_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
 reworked_e.grid(row=1, column=1, padx=4, pady=5)
 
 inlt_l = tk.Label(step2, text="INLT",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
 inlt_l.grid(row=1, column=2, sticky="w")
-inlt_e= tk.Entry(step2,font=stp12_entry_font,width=6)
+inlt_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s)
 inlt_e.grid(row=1, column=3, padx=4, pady=5)
 inlt_e.insert(0,0)
 
@@ -189,14 +193,14 @@ otlt_e.grid(row=1, column=5, padx=4, pady=5)
 otlt_e.insert(0,"0")
 
 # Step 2 row 3
-QC_OK_l = tk.Label(step2, text="QC_OK",font=stp12_lable_font,anchor="w",width=stp12_l_w)
+QC_OK_l = tk.Label(step2, text="QC_OK",font=stp12_lable_font,anchor="w",width=stp12_l_w2)
 QC_OK_l.grid(row=2, column=0, sticky="w")
 QC_OK_e = tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s,validatecommand=vcmd,validate="key")
 QC_OK_e.grid(row=2, column=1, padx=4, pady=5)
 
 vlv_l = tk.Label(step2, text="VLV",font=stp12_lable_font,anchor="w",width=stp12_l_wm)
 vlv_l.grid(row=2, column=2, sticky="w")
-vlv_e= tk.Entry(step2,font=stp12_entry_font,width=6)
+vlv_e= tk.Entry(step2,font=stp12_entry_font,width=stp12_e_w_s)
 vlv_e.grid(row=2, column=3, padx=4, pady=5)
 vlv_e.insert(0,0)
 
@@ -209,7 +213,7 @@ oth_e.insert(0,"0")
 
 # Row 3: Submit button
 stp2_btn_submit = tk.Button(step2, text="End Time", font=("Arial", 12,"bold"),command=on_btn2_clk)
-stp2_btn_submit.grid(row=3, column=1, columnspan=2, pady=10)
+stp2_btn_submit.grid(row=3, column=0, columnspan=6, pady=10)
 
 # Create a labeled frame for "Production Dashboard"
 Prodtn_Dshbord = tk.LabelFrame(frame_out, padx=5, pady=10,bg="#C00000")
